@@ -1,6 +1,7 @@
 import express, {json} from "express";
 import cors from 'cors';
 import dotenv from 'dotenv';
+import router from "./Routers/index";
 
 
 const app = express()
@@ -8,7 +9,7 @@ const app = express()
 dotenv.config()
 app.use(json())
 
-// app.use(router)
+app.use(router)
 // app.use(errorMiddleware)
 
 
