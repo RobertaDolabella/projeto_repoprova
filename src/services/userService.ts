@@ -1,5 +1,5 @@
 import { string } from "joi";
-import { userSent } from "../types/types";
+import { userPartial, userSent } from "../types/types";
 import { checkExistingUsers, createUser } from "../repository/userRepostory";
 import Cryptr from "cryptr";
 import dotenv from 'dotenv';
@@ -8,18 +8,19 @@ import dotenv from 'dotenv';
 dotenv.config( {path:'.env'}) ;
 
 export async function loginUser (userData:userSent){
+console.log("entrou no loginUser")
 
-const user = await checkExistingUsers(userData.email)
+const user:any = await checkExistingUsers(userData.email)
 
-if(user !==undefined) throw {message: "This user is not available, please try another email"}
+thereIsaUser(user)
 
 const encryptedPassword = encryptPassword(userData.password)
 
-await createUser(userData.email, encryptedPassword)
+ await createUser(userData.email, encryptedPassword)
 }
 
-export function encryptPassword(password: string) {
-
+function encryptPassword(password: string) {
+    console.log("entrou no password")
     const secret:string = String(process.env.SECRETPASSWORD)
     console.log(secret)
 
@@ -28,6 +29,12 @@ export function encryptPassword(password: string) {
 
     return encryptedcardPassword
 }
+function thereIsaUser(user:userPartial){
+console.log(user)
+    if(user !==null) throw {message: "This user is not available, please try another email"}
+    return
+}
+
 
 const userService ={
     loginUser

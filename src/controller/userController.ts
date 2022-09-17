@@ -4,12 +4,13 @@ import { userSent } from "../types/types";
 import { loginUser } from "../services/userService";
 
 
-export function login(res:Response, req:Request){
-
+export function login(req:Request, res:Response){
+console.log("entrou aqui no login")
     const userData:userSent = req.body
 
     loginUser(userData)
-
+    
+res.sendStatus(200)
 }
 
 

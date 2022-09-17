@@ -1,4 +1,5 @@
 import { prismadata } from "../database";
+import { userPartial } from "../types/types";
 
 export async function checkExistingUsers(email:string){
 
